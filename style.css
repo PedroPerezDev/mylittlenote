@@ -787,7 +787,7 @@ th.col-hover .habit-name {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 12px 12px 20px 16px;
+    padding: 12px 12px 20px 0;
     min-width: 0;
   }
 
