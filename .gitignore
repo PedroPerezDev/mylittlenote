@@ -1,0 +1,10 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Referencias locales (no subir imágenes de referencia si son privadas)
+# referencias/
+
+# Variables de entorno (por si en algún momento se usan)
+.env
+.env.local

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuaderno de Hábitos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <button class="nav-arrow" id="btn-prev" aria-label="Mes anterior">←</button>
+
+  <div id="page">
+
+    <!-- CABECERA -->
+    <header id="page-header">
+      <div class="page-header-left">
+        <button id="btn-auth">cuenta</button>
+      </div>
+      <h1 id="app-title">My little note<span id="app-byline" hidden>by <span id="app-username"></span></span></h1>
+      <div class="page-header-right">
+        <button id="btn-settings" title="Ajustes" aria-label="Ajustes">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="page-main">
+
+    <!-- SECCIÓN DIARIO -->
+    <div id="diary-section">
+      <div id="left-content">
+        <h2 id="diary-month-title"></h2>
+        <button id="btn-show-chart">Ver gráfico de ánimo</button>
+        <button id="btn-show-stats">Estadísticas</button>
+        <div id="diary-rows"></div>
+      </div>
+    </div>
+
+    <!-- SEPARADOR (línea roja de margen) -->
+    <div id="page-divider"></div>
+
+    <!-- SECCIÓN HÁBITOS -->
+    <div id="habits-section">
+      <div id="right-content">
+
+        <!-- Banner: copiar hábitos del mes anterior -->
+        <div id="copy-habits-banner" hidden>
+          <span id="copy-habits-text">¿añadir las tareas del mes anterior?</span>
+          <button id="btn-copy-habits">sí →</button>
+        </div>
+
+        <table id="habit-grid">
+          <thead id="grid-head"></thead>
+          <tbody id="grid-body"></tbody>
+        </table>
+        <div id="empty-state" hidden>
+          <p>aún no hay hábitos</p>
+          <p>pulsa <span class="inline-plus">＋</span> para añadir uno</p>
+        </div>
+      </div>
+    </div>
+
+    </div> <!-- /page-main -->
+
+    <!-- FOOTER -->
+    <footer id="page-footer">
+      <p id="footer-text">Desarrollado por Pedro Pérez · 2026</p>
+    </footer>
+
+  </div>
+
+  <button class="nav-arrow" id="btn-next" aria-label="Mes siguiente">→</button>
+
+  <!-- MODAL DIARIO -->
+  <div id="diary-modal" hidden>
+    <div id="diary-modal-backdrop"></div>
+    <div id="diary-modal-card">
+      <div id="diary-modal-day-label"></div>
+      <textarea id="diary-modal-text" spellcheck="false" placeholder="..."></textarea>
+      <button id="diary-modal-close" class="btn-modal-close" aria-label="Cerrar">×</button>
+    </div>
+  </div>
+
+  <!-- MODAL GRÁFICO DE HUMOR -->
+  <div id="mood-chart-modal" hidden>
+    <div id="mood-chart-backdrop"></div>
+    <div id="mood-chart-card">
+      <div id="mood-chart-nav">
+        <button id="mood-chart-prev">←</button>
+        <div id="mood-chart-title"></div>
+        <button id="mood-chart-next">→</button>
+      </div>
+      <div id="mood-chart-svg-wrap"></div>
+      <div id="mood-chart-legend">
+        <span class="mood-legend-h">:) alegría</span>
+        <span class="mood-legend-a">&gt;:( enfado</span>
+      </div>
+      <button id="mood-chart-close" class="btn-modal-close" aria-label="Cerrar">×</button>
+    </div>
+  </div>
+
+  <!-- MODAL ESTADÍSTICAS -->
+  <div id="stats-modal" hidden>
+    <div id="stats-backdrop"></div>
+    <div id="stats-card">
+      <div id="stats-nav">
+        <button id="stats-prev">←</button>
+        <div id="stats-title"></div>
+        <button id="stats-next">→</button>
+      </div>
+      <div id="stats-bars"></div>
+      <p id="stats-message"></p>
+      <button id="stats-close" class="btn-modal-close" aria-label="Cerrar">×</button>
+    </div>
+  </div>
+
+  <!-- MODAL AUTH -->
+  <div id="auth-modal" hidden>
+    <div id="auth-backdrop"></div>
+    <div id="auth-card">
+      <div id="auth-user-info" hidden>
+        <p id="auth-user-label">conectado como</p>
+        <p id="auth-user-email"></p>
+      </div>
+      <div id="auth-tabs">
+        <button class="auth-tab active" data-tab="login">entrar</button>
+        <button class="auth-tab" data-tab="register">registrarse</button>
+      </div>
+      <input id="auth-name" type="text" placeholder="nombre" autocomplete="name" hidden>
+      <input id="auth-email" type="email" placeholder="email" autocomplete="email">
+      <input id="auth-password" type="password" placeholder="contraseña" autocomplete="current-password">
+      <div id="auth-error"></div>
+      <button id="auth-submit">entrar</button>
+      <button id="auth-logout" hidden>cerrar sesión</button>
+      <button id="auth-modal-close" class="btn-modal-close" aria-label="Cerrar">×</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
