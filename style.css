@@ -740,7 +740,6 @@ th.col-hover .habit-name {
   .page-header-right { width: 26px; }
   #app-title { font-size: 1.2rem; }
   #btn-menu { display: flex; }
-  #btn-show-chart, #btn-show-stats { display: none; }
 
   /* Layout principal: columna */
   #page-main { flex-direction: column; }
@@ -1419,4 +1418,10 @@ td.cell.mood-a .mood-input { color: #b52020; }
 }
 .mood-legend-h { color: #2d5c22; font-weight: 600; }
 .mood-legend-a { color: #b52c1e; font-weight: 600; }
+
+/* Overrides móvil al final para ganar la cascada */
+@media (max-width: 699px) {
+  #btn-show-chart,
+  #btn-show-stats { display: none; }
+}
 
