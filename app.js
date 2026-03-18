@@ -76,6 +76,7 @@ async function cargarMesDesdeSupabase() {
 /* ===== SUPABASE: CARGAR TODO (al hacer login) ===== */
 async function cargarTodoDesdeSupabase() {
   if (!currentUser) return;
+  prevMonthHabits = []; // resetear al cargar un usuario nuevo
   const { data: rows, error } = await db.from('habits_monthly')
     .select('month, data')
     .eq('user_id', currentUser.id)
@@ -227,6 +228,7 @@ async function logout() {
   await db.auth.signOut();
   currentUser = null;
   habitsByMonth = {};
+  prevMonthHabits = [];
   state = { habits: [], completions: {}, skips: {}, diary: {}, mood: {} };
   saveState(); // limpia también el localStorage
   updateAuthIndicator();
