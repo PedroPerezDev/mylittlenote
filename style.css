@@ -807,7 +807,20 @@ th.col-hover .habit-name {
 
   #page-header { padding: 10px 12px 8px 16px; }
   #diary-section::before { display: none; }
+
+  #mobile-month-title {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid var(--rule);
+  }
 }
+
+#mobile-month-title { display: none; }
 
 /* ===== BOTÓN VER GRÁFICO ===== */
 #btn-show-chart {

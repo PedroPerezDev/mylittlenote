@@ -812,8 +812,9 @@ function render() {
   const totalDays = getDaysInMonth(currentYear, currentMonth);
 
   /* ---- PÁGINA IZQUIERDA: Diario ---- */
-  const titleEl = document.getElementById('diary-month-title');
-  titleEl.textContent = MONTH_NAMES[currentMonth - 1].toUpperCase() + ' ' + currentYear;
+  const monthLabel = MONTH_NAMES[currentMonth - 1].toUpperCase() + ' ' + currentYear;
+  document.getElementById('diary-month-title').textContent  = monthLabel;
+  document.getElementById('mobile-month-title').textContent = monthLabel;
 
   const diaryContainer = document.getElementById('diary-rows');
   diaryContainer.innerHTML = '';
@@ -1144,22 +1145,6 @@ function setupEvents() {
 
   window.addEventListener('resize', () => requestAnimationFrame(syncDiaryAlignment));
 
-  // Swipe táctil para cambiar de mes
-  let touchStartX = 0;
-  let touchStartY = 0;
-  document.getElementById('page').addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-  document.getElementById('page').addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    // Solo si el gesto es más horizontal que vertical y supera 50px
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      if (dx < 0) nextMonth();
-      else prevMonth();
-    }
-  }, { passive: true });
 }
 
 /* ===== ACTUALIZACIÓN PARCIAL DE CELDA ===== */
