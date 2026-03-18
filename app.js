@@ -1114,8 +1114,8 @@ function setupEvents() {
     const input = document.getElementById('auth-password');
     const isPassword = input.type === 'password';
     input.type = isPassword ? 'text' : 'password';
-    document.getElementById('eye-open').hidden   =  isPassword;
-    document.getElementById('eye-closed').hidden = !isPassword;
+    document.getElementById('eye-open').style.display   = isPassword ? 'none' : '';
+    document.getElementById('eye-closed').style.display = isPassword ? '' : 'none';
   });
 
   document.getElementById('mood-chart-close').addEventListener('click', closeMoodChart);
