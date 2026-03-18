@@ -1093,7 +1093,27 @@ function setupEvents() {
   document.getElementById('stats-prev').addEventListener('click', prevStatsMonth);
   document.getElementById('stats-next').addEventListener('click', nextStatsMonth);
 
-  // Gear: sin funcionalidad por ahora
+  // Menú hamburguesa (móvil)
+  const btnMenu    = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  btnMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenu.hidden = !mobileMenu.hidden;
+  });
+  document.getElementById('menu-btn-chart').addEventListener('click', () => {
+    mobileMenu.hidden = true;
+    openMoodChart();
+  });
+  document.getElementById('menu-btn-stats').addEventListener('click', () => {
+    mobileMenu.hidden = true;
+    openStatsModal();
+  });
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.hidden && !mobileMenu.contains(e.target) && e.target !== btnMenu) {
+      mobileMenu.hidden = true;
+    }
+  });
 
   document.getElementById('btn-auth').addEventListener('click', () => {
     if (currentUser) logout();

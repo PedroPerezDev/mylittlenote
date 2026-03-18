@@ -185,19 +185,64 @@ body {
   color: var(--today-red);
 }
 
-#btn-settings {
+/* Rueda dentada: oculta por ahora */
+#btn-settings { display: none; }
+
+/* Hamburguesa */
+#btn-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ink-mid);
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  transition: color 0.15s, transform 0.3s ease;
+  padding: 3px 2px;
 }
-#btn-settings:hover {
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 1.8px;
+  background: var(--ink-mid);
+  border-radius: 1px;
+  transition: background 0.15s;
+}
+#btn-menu:hover .hamburger-line { background: var(--ink); }
+
+/* Desplegable del menú */
+#mobile-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background-color: #FBF6E4;
+  background-image: repeating-linear-gradient(
+    178deg,
+    transparent 0px, transparent 1.5px,
+    rgba(130,105,60,0.03) 1.5px, rgba(130,105,60,0.03) 2.5px,
+    transparent 2.5px, transparent 8px
+  );
+  box-shadow: 2px 4px 16px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,0,0,0.07);
+  padding: 8px 0;
+  min-width: 170px;
+  z-index: 200;
+  transform: rotate(0.3deg);
+}
+#mobile-menu[hidden] { display: none; }
+#mobile-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
   color: var(--ink);
-  transform: rotate(40deg);
+  text-align: left;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+#mobile-menu button:hover {
+  background: rgba(28,36,97,0.06);
 }
 
 /* ===== FOOTER ===== */
@@ -694,6 +739,7 @@ th.col-hover .habit-name {
   .page-header-left,
   .page-header-right { width: 26px; }
   #app-title { font-size: 1.2rem; }
+  #btn-menu { display: flex; }
 
   /* Layout principal: columna */
   #page-main { flex-direction: column; }
