@@ -740,6 +740,7 @@ th.col-hover .habit-name {
   .page-header-right { width: 26px; }
   #app-title { font-size: 1.2rem; }
   #btn-menu { display: flex; }
+  #btn-show-chart, #btn-show-stats { display: none; }
 
   /* Layout principal: columna */
   #page-main { flex-direction: column; }
