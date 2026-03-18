@@ -938,6 +938,29 @@ th.col-hover .habit-name {
   outline: none;
   width: 100%;
 }
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-wrapper input {
+  flex: 1;
+  padding-right: 28px;
+}
+.btn-eye {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-mid);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.btn-eye:hover { color: var(--ink); }
+
 #auth-card input::placeholder { color: var(--ink-mid); }
 #auth-card input:focus {
   border-bottom-color: var(--ink);

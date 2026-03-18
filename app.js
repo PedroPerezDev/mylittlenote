@@ -1110,6 +1110,14 @@ function setupEvents() {
     if (e.key === 'Enter') submitAuth();
   });
 
+  document.getElementById('btn-toggle-password').addEventListener('click', () => {
+    const input = document.getElementById('auth-password');
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    document.getElementById('eye-open').hidden   =  isPassword;
+    document.getElementById('eye-closed').hidden = !isPassword;
+  });
+
   document.getElementById('mood-chart-close').addEventListener('click', closeMoodChart);
   document.getElementById('mood-chart-backdrop').addEventListener('click', closeMoodChart);
   document.getElementById('mood-chart-prev').addEventListener('click', prevChartMonth);
