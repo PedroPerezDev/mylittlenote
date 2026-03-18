@@ -703,28 +703,28 @@ th.col-hover .habit-name {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 699px) {
   body {
-    padding: 0;
+    padding: 0 0 60px;
     align-items: flex-start;
     justify-content: flex-start;
     overflow-x: hidden;
     background: var(--paper);
   }
 
-  /* Flechas: flotantes a los lados, centradas verticalmente */
+  /* Flechas: abajo, centradas */
   .nav-arrow {
     font-size: 1.8rem;
-    padding: 8px 8px;
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-    background: rgba(245, 239, 216, 0.72);
+    padding: 6px 18px;
+    top: auto;
+    bottom: 10px;
+    transform: none;
+    background: rgba(245, 239, 216, 0.85);
     backdrop-filter: blur(2px);
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   }
-  .nav-arrow:hover { transform: translateY(-50%) scale(1.1); }
-  #btn-prev { left:  4px; }
-  #btn-next { right: 4px; }
+  .nav-arrow:hover { transform: scale(1.1); }
+  #btn-prev { left:  16px; }
+  #btn-next { right: 16px; }
 
   /* Página: ancho completo */
   #page {
@@ -842,28 +842,6 @@ th.col-hover .habit-name {
   /* Footer */
   #page-footer { padding: 6px 16px 8px; }
   #footer-text { font-size: 0.72rem; }
-}
-
-/* Pantallas muy pequeñas: ocultar diario */
-@media (max-width: 479px) {
-  #diary-section,
-  #page-divider { display: none; }
-
-  #habits-section { padding: 16px 8px 20px 10px; }
-
-  #page-header { padding: 10px 12px 8px 16px; }
-  #diary-section::before { display: none; }
-
-  #mobile-month-title {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    color: var(--ink);
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1.5px solid var(--rule);
-  }
 }
 
 #mobile-month-title { display: none; }
