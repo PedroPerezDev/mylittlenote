@@ -140,36 +140,20 @@ function updateByline() {
 }
 
 function openAuthModal() {
-  const modal     = document.getElementById('auth-modal');
-  const submit    = document.getElementById('auth-submit');
-  const logoutBtn = document.getElementById('auth-logout');
-  const closeBtn  = document.getElementById('auth-modal-close');
   document.getElementById('auth-error').textContent = '';
   document.getElementById('auth-error').style.color = '';
   document.getElementById('auth-name').value     = '';
   document.getElementById('auth-email').value    = '';
   document.getElementById('auth-password').value = '';
-
-  if (currentUser) {
-    submit.hidden        = true;
-    logoutBtn.hidden     = false;
-    closeBtn.hidden      = false;
-    document.querySelectorAll('.auth-tab').forEach(t => t.hidden = true);
-    document.getElementById('auth-email').hidden    = true;
-    document.getElementById('auth-password').hidden = true;
-    document.getElementById('auth-user-info').hidden  = false;
-    document.getElementById('auth-user-email').textContent = currentUser.email;
-  } else {
-    submit.hidden        = false;
-    logoutBtn.hidden     = true;
-    closeBtn.hidden      = true;
-    document.querySelectorAll('.auth-tab').forEach(t => t.hidden = false);
-    document.getElementById('auth-email').hidden    = false;
-    document.getElementById('auth-password').hidden = false;
-    document.getElementById('auth-user-info').hidden  = true;
-    setAuthMode('login');
-  }
-  modal.hidden = false;
+  document.getElementById('auth-submit').hidden      = false;
+  document.getElementById('auth-logout').hidden      = true;
+  document.getElementById('auth-modal-close').hidden = true;
+  document.getElementById('auth-user-info').hidden   = true;
+  document.querySelectorAll('.auth-tab').forEach(t => t.hidden = false);
+  document.getElementById('auth-email').hidden    = false;
+  document.getElementById('auth-password').hidden = false;
+  setAuthMode('login');
+  document.getElementById('auth-modal').hidden = false;
 }
 
 function closeAuthModal() {
@@ -247,22 +231,8 @@ async function logout() {
   saveState(); // limpia también el localStorage
   updateAuthIndicator();
   updateByline();
-
-  document.getElementById('auth-submit').hidden        = false;
-  document.getElementById('auth-logout').hidden        = true;
-  document.getElementById('auth-modal-close').hidden  = true;
-  document.getElementById('auth-user-info').hidden    = true;
-  document.getElementById('auth-user-email').textContent = '';
-  document.getElementById('auth-error').textContent   = '';
-  document.getElementById('auth-error').style.color   = '';
-  document.getElementById('auth-name').value          = '';
-  document.getElementById('auth-email').value         = '';
-  document.getElementById('auth-password').value      = '';
-  document.getElementById('auth-email').hidden        = false;
-  document.getElementById('auth-password').hidden     = false;
-  document.querySelectorAll('.auth-tab').forEach(t => t.hidden = false);
-  setAuthMode('login');
   render();
+  openAuthModal();
 }
 
 /* ===== PERSISTENCIA LOCAL ===== */
@@ -756,6 +726,7 @@ async function renderStats() {
 
   const habits      = habitsByMonth[mk] || (mk === getMonthKey() ? state.habits : []);
   const completions = state.completions[mk] || {};
+  const skips       = state.skips[mk]       || {};
   const totalDays   = getDaysInMonth(statsYear, statsMonth);
   const hoy         = new Date();
   const diasBase    = (statsYear === hoy.getFullYear() && statsMonth === hoy.getMonth() + 1)
@@ -763,9 +734,11 @@ async function renderStats() {
     : totalDays;
 
   const items = habits.map(h => {
-    const done = (completions[h.id] || []).length;
-    const rate = diasBase > 0 ? Math.round((done / diasBase) * 100) : 0;
-    return { name: h.name, done, total: diasBase, rate };
+    const done        = (completions[h.id] || []).length;
+    const saltados    = (skips[h.id] || []).filter(d => d <= diasBase).length;
+    const aplicables  = diasBase - saltados;
+    const rate        = aplicables > 0 ? Math.round((done / aplicables) * 100) : 0;
+    return { name: h.name, done, total: aplicables, rate };
   }).sort((a, b) => b.rate - a.rate);
 
   document.getElementById('stats-title').textContent =
@@ -1105,7 +1078,10 @@ function setupEvents() {
 
   // Gear: sin funcionalidad por ahora
 
-  document.getElementById('btn-auth').addEventListener('click', openAuthModal);
+  document.getElementById('btn-auth').addEventListener('click', () => {
+    if (currentUser) logout();
+    else openAuthModal();
+  });
   document.getElementById('auth-backdrop').addEventListener('click', () => { if (currentUser) closeAuthModal(); });
   document.getElementById('auth-modal-close').addEventListener('click', closeAuthModal);
   document.getElementById('auth-submit').addEventListener('click', submitAuth);

@@ -528,9 +528,8 @@ td.cell.col-hover:not(.inactive) {
   background: rgba(28, 36, 97, 0.06);
 }
 th.col-hover .habit-name {
-  color: var(--ink);
-  opacity: 1;
-  font-weight: 700;
+  background: rgba(181, 44, 30, 0.1);
+  border-radius: 2px;
 }
 
 /* ===== EMPTY STATE ===== */
@@ -859,7 +858,10 @@ th.col-hover .habit-name {
   width: 100%;
 }
 #auth-card input::placeholder { color: var(--ink-mid); }
-#auth-card input:focus { border-bottom-color: var(--ink); }
+#auth-card input:focus {
+  border-bottom-color: var(--ink);
+  caret-color: var(--ink);
+}
 #auth-error {
   font-size: 0.85rem;
   color: var(--today-red);
@@ -886,6 +888,8 @@ th.col-hover .habit-name {
   cursor: pointer;
   padding: 5px 10px;
   text-align: center;
+  align-self: center;
+  margin: 18px auto 6px;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 #auth-logout:hover {
@@ -894,6 +898,15 @@ th.col-hover .habit-name {
   color: #b52c1e;
 }
 #btn-auth.connected { border-color: #2a6e2a; color: #2a6e2a; }
+#btn-auth.connected:hover {
+  font-size: 0;
+  border-color: rgba(181, 44, 30, 0.45);
+  color: #b52c1e;
+}
+#btn-auth.connected:hover::after {
+  content: 'cerrar sesión';
+  font-size: 0.82rem;
+}
 
 /* ===== BOTÓN CUENTA ===== */
 #btn-auth {
@@ -1065,6 +1078,7 @@ td.cell.mood-a .mood-input { color: #b52020; }
   margin-bottom: 18px;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 6px;
+  padding-right: 22px;
 }
 #stats-prev, #stats-next {
   background: none;
@@ -1230,6 +1244,7 @@ td.cell.mood-a .mood-input { color: #b52020; }
   margin-bottom: 14px;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 6px;
+  padding-right: 22px;
 }
 
 #mood-chart-prev,
