@@ -1,0 +1,25 @@
+{
+  "name": "My little note",
+  "short_name": "My little note",
+  "description": "Cuaderno de hábitos y diario mensual",
+  "start_url": "/mylittlenote/",
+  "scope": "/mylittlenote/",
+  "display": "standalone",
+  "background_color": "#1a1108",
+  "theme_color": "#1a1108",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
