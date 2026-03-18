@@ -735,7 +735,7 @@ th.col-hover .habit-name {
   }
 
   /* Header */
-  #page-header { padding: 10px 12px 8px 40px; }
+  #page-header { padding: 10px 12px 8px 12px; }
   .page-header-left,
   .page-header-right { width: 26px; }
   #app-title { font-size: 1.2rem; }
