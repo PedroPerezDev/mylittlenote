@@ -271,7 +271,7 @@ body {
 #diary-section {
   width: var(--diary-w);
   flex-shrink: 0;
-  padding: 32px 18px 28px 48px;
+  padding: 32px 18px 28px 22px;
   position: relative;
 }
 
@@ -279,7 +279,7 @@ body {
 #diary-section::before {
   content: '';
   position: absolute;
-  top: 0; left: 34px;
+  top: 0; left: 10px;
   width: 1.5px; height: 100%;
   background: var(--margin);
   pointer-events: none;
@@ -747,7 +747,7 @@ th.col-hover .habit-name {
   /* Diario: ancho completo, más compacto */
   #diary-section {
     width: 100%;
-    padding: 20px 12px 10px 40px;
+    padding: 20px 12px 10px 22px;
   }
   #diary-month-title { font-size: 1.6rem; margin-bottom: 6px; }
 
@@ -1423,5 +1423,17 @@ td.cell.mood-a .mood-input { color: #b52020; }
 @media (max-width: 699px) {
   #btn-show-chart,
   #btn-show-stats { display: none; }
+
+  /* Stats modal: menos padding izquierdo, nombre más estrecho → barras más anchas */
+  #stats-card {
+    padding: 22px 16px 18px 28px;
+  }
+  #stats-card::before {
+    left: 18px;
+  }
+  .stats-name {
+    width: 72px;
+    font-size: 0.85rem;
+  }
 }
 
