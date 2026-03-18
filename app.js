@@ -122,7 +122,7 @@ function updateAuthIndicator() {
     btn.textContent = '✓ conectado';
     btn.classList.add('connected');
   } else {
-    btn.textContent = 'cuenta';
+    btn.textContent = 'entrar';
     btn.classList.remove('connected');
   }
 }
