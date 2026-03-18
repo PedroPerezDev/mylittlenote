@@ -873,6 +873,11 @@ function render() {
   thead.innerHTML = '';
   const headerRow = document.createElement('tr');
 
+  // Columna día: solo visible en móvil
+  const thDay = document.createElement('th');
+  thDay.className = 'grid-day-col';
+  headerRow.appendChild(thDay);
+
   for (const habit of habits) {
     const th = document.createElement('th');
     th.dataset.habitId = habit.id;
@@ -915,6 +920,17 @@ function render() {
     const tr = document.createElement('tr');
     const inactive = d > totalDays;
     if (isToday(d)) tr.classList.add('today');
+
+    // Celda de día (solo visible en móvil)
+    const tdDay = document.createElement('td');
+    tdDay.className = 'grid-day-col';
+    if (inactive) {
+      tdDay.classList.add('inactive');
+    } else {
+      tdDay.textContent = d;
+      if (isToday(d)) tdDay.classList.add('today-num');
+    }
+    tr.appendChild(tdDay);
 
     for (const habit of habits) {
       const td = document.createElement('td');
@@ -1127,6 +1143,23 @@ function setupEvents() {
   }
 
   window.addEventListener('resize', () => requestAnimationFrame(syncDiaryAlignment));
+
+  // Swipe táctil para cambiar de mes
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.getElementById('page').addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.getElementById('page').addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // Solo si el gesto es más horizontal que vertical y supera 50px
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) nextMonth();
+      else prevMonth();
+    }
+  }, { passive: true });
 }
 
 /* ===== ACTUALIZACIÓN PARCIAL DE CELDA ===== */
