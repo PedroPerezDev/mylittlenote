@@ -1199,6 +1199,9 @@ async function init() {
     state = { habits: [], completions: {}, skips: {}, diary: {}, mood: {} };
     await cargarTodoDesdeSupabase();
     saveState();
+  } else {
+    // Sin sesión: mostrar login directamente
+    openAuthModal();
   }
 
   render();
